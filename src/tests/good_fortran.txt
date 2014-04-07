@@ -1,0 +1,3 @@
+integer	a	10
+double precision	f	0.19D00
+character(len=1024)	str	'abcde'

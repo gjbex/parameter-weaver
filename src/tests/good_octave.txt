@@ -1,0 +1,4 @@
+logical	a	1
+double	f	0.19
+string	str	'abcde'
+

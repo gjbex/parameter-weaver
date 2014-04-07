@@ -1,0 +1,62 @@
+#
+# ParameterWeaver: a code generator to handle command line parameters
+# and configuration files for C/C++/Fortran/R/Octave
+# Copyright (C) 2013 Geert Jan Bex <geertjan.bex@uhasselt.be>
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+MKDIR = /bin/mkdir
+INSTALL = /usr/bin/install
+RSYNC = /usr/bin/rsync
+CHMOD = /bin/chmod
+FIND = /usr/bin/find
+
+INSTALL_DIR = /usr/local/
+LIB_DIR = $(INSTALL_DIR)/lib/parameter_weaver/python
+TMPL_DIR = $(INSTALL_DIR)/lib/parameter_weaver
+
+WEAVE = weave
+
+all:
+	echo "type 'make install' to install ParameterWeaver into /usr/local"
+	echo "type 'make INSTALL_DIR=/your/dir/of/choice install' to install elsewhere"
+	echo "type 'make test' to execute unit tests"
+	echo "type 'make clean' to clean up the mess after testing"
+
+clean:
+	rm -rf tmp
+	rm -f cl_params.[ch] cl_params.f90 cl_params.r
+	rm -f .RData .Rhistory
+	find . -name "*.pyc" -exec rm {} \;
+	find . -name "*~" -exec rm {} \;
+
+test:
+	./run_tests
+
+install:
+	test -d $(INSTALL_DIR) || $(MKDIR) -m 755 $(INSTALL_DIR)
+	test -d $(INSTALL_DIR)/bin || $(MKDIR) -m 755 $(INSTALL_DIR)/bin
+	$(INSTALL) -t $(INSTALL_DIR)/bin -m 755 $(WEAVE)
+	test -d $(LIB_DIR) || $(MKDIR) -p -m 755 $(LIB_DIR)
+	$(INSTALL) --backup=none -t $(LIB_DIR) -m 644 weave.py
+	test -d $(LIB_DIR) || $(MKDIR) -p -m 755 $(LIB_DIR)
+	$(INSTALL) --backup=none -t $(LIB_DIR) -m 644 weave.py
+	$(RSYNC) -a --exclude-from=excluded.txt vsc $(LIB_DIR)
+	$(RSYNC) -a --exclude-from=excluded.txt tmpl $(TMPL_DIR)
+	$(CHMOD) -R a+r $(LIB_DIR)
+	$(FIND) $(LIB_DIR) -perm -u=x -exec chmod go+x {} \;
+	$(RSYNC) -a --exclude-from=excluded.txt doc $(INSTALL_DIR)
+	$(RSYNC) -a --exclude-from=excluded.txt examples $(INSTALL_DIR)
+

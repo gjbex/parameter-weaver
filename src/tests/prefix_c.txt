@@ -1,0 +1,3 @@
+double,T,1.0
+double,Tmin,0.0
+double,Tmax,2.0

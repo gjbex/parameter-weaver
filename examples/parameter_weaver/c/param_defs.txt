@@ -1,0 +1,5 @@
+int	n	10
+double	alpha	0.19
+char *	out	'output.txt'
+bool	verbose	false
+

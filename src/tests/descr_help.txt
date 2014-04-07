@@ -1,0 +1,7 @@
+usage: my_appl  -a <integer> -f <DP float> -my_string <string> -? 
+  brilliant application that predicts the future
+  -a <integer>: number of items (default: 10)
+  -f <DP float>: fraction valid (default: 0.19)
+  -my_string <string>: name of run (default: 'abcde')
+  -?: print this message
+(c) 1999, Told You So.inc

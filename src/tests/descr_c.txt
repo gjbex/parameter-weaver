@@ -1,0 +1,3 @@
+int	a	10	number of items
+double	f	0.19	fraction valid
+char *	my_string	'''abcde'''	name of run

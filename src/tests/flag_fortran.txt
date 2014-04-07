@@ -1,0 +1,4 @@
+integer	a	10
+logical	flag	F
+character(len=1024)	str	'abcde'
+

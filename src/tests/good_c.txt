@@ -1,0 +1,3 @@
+int	a	10
+double	f	0.19
+char *	str	'abcde'

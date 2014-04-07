@@ -1,0 +1,4 @@
+integer	a	10
+double	f	0.19
+string	str	'abcde'
+

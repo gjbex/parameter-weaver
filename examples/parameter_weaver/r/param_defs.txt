@@ -1,0 +1,5 @@
+integer	n	10
+double	alpha	0.19
+string	out	'output.txt'
+logical	verbose	F
+

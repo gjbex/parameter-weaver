@@ -1,0 +1,5 @@
+integer	n	10
+double precision	alpha	0.19
+character(len=1024)	out	'output.txt'
+logical	verbose	false
+

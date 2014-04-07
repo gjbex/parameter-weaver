@@ -1,0 +1,80 @@
+<html>
+
+<head>
+<title>ParameterWeaver documentation</title>
+</head>
+
+<body>
+
+<h1>ParameterWeaver documentation</h1>
+
+<h2>Table of contents</h2>
+<p>
+<ol>
+  <li> <a href="#intro">Introduction &amp; motivation</a> </li>
+  <li> <a href="#overview">High-level overview  &amp; concepts</a> </li>
+  <li> Target language specific documentation and examples
+    <ol>
+      <li> <a href="c.html">C/C++</a> </li>
+      <li> <a href="f90.html">Fortran 90</a> </li>
+      <li> <a href="r.html">R</a> </li>
+    </ol>
+  </li>
+  <li> <a href="#future">Future work</a> </li>
+  <li> <a href="#contact">Contact &amp; support</a> </li>
+</ol> </p>
+
+<h2><a name="intro">Introduction &amp; motivation</a></h2>
+<p> When working on the command line such as in the Bash shell, applications support command line flags and parameters.  Many programming languages offer support to conveniently deal with command line arguments out of the box, e.g., Python.  However, quite a number of languages used in a scientific context, e.g., C/C++, Fortran, R, Matlab do not.  Although those languages offer the necessary facilities, it is at best somewhat cumbersome to use them, and often the process is rather error prone.  A similar picture emerges when a programmer has to deal with configuration files, again, a painstaking process </p>
+<p> Quite a number of libraries have been developed over the years that can be used to conveniently handle command line arguments and configuration files.  However, this complicates the deployment of the application since it will have to rely on the presence of these libraries. </p>
+<p> ParameterWeaver has a different approach: it generates the necessary code to deal with the command line arguments and configuration files of the application in the target language, so that these source files can be distributed along with those of the application.  This implies that systems that don't have ParameterWeaver installed still can run that application. </p>
+<p> Using ParameterWeaver is as simple as writing a definition file for the command line arguments and/or configuration parameters, and executing the code generator via the command lnie.  This can be conveniently integrated into a standard build process such as make. </p>
+<p> ParameterWeaver currently supports the following target languages:
+<ul>
+  <li> C/C++ </li>
+  <li> Fortran 90 </li>
+  <li> R </li>
+</ul>
+</p>
+
+<h2><a name="overview">High-level overview &amp; concepts</a></h2>
+<h3>Parameter definition files</h3>
+<p> A parameter definition file is a CSV text file where each line defines a parameter.  A parameter has a type, a name, a default values, and optionally, a description.  To add documentation, comments can be added to the definition file.  The types are specific to the target language, e.g., an integer would be denoted by <tt>int</tt> for C/C++, and by <tt>integer</tt> for Fortran 90.  The supported types are documented for each implemented target language. </p>
+<p> By way of illustration, a parameter definition file is given below for C as a target language, additional examples are shown in the target language specific sections:
+<pre>
+int,numParticles,1000,number of particles in the system
+double,temperature,273,system temperature in Kelvin
+char*,intMethod,'newton',integration method to use
+</pre>
+Note that this parameter definition file should be viewed as an integral part of the source code.
+</p>
+
+<h3>Code generation</h3>
+<p> ParameterWeaver will generate code to
+<ol>
+  <li> initialize the parameter varaibles to the default values as specified in the parameter definition file; </li>
+  <li> parse the actual command line arguments at runtime to determine the user specified values, and </li>
+  <li> optionally, parse a configuration file; </li>
+  <li> print the values of the parameters to an output stream. </li>
+</ol>
+The implementation and features of the resulting code fragments are specific to the target language, and try to be as close as possible to the idioms of that language.  Again, this is documented for each target language specifically.  The nature and number of these code fragments varies from one target language to the other, again trying to match the language's idioms as closely as possible.  For C/C++, a declaration file (<tt>.h</tt>) and a definition file (<tt>.c</tt>),  as well as a source and header file containing definitions and declarations of auxillary functions.  For Fortran 90, a single file (<tt>.f90</tt> will be generated that contains both declarations and definitions. </p>
+
+<h2><a name="#future">Future work</a></h2>
+<p> The follownig features are plannen in future releases:
+<ul>
+    <li> Additional target languages:
+    <ul>
+      <li> Matlab </li>
+      <li> Java </li>
+    </ul>
+    Support for Perl and Python is not planned, since these language have facilities to deal with command line arguments in their respective standard libraries.
+    <li> Currently, configuration file handling is implemented for C/C++ and Fortran 90 only.  For R, the <tt>source</tt> function can be used directly to provide similar functionality, but explicit support may be added in the future. </li>
+</ul> </p>
+
+<h2><a name="#contact">Contact &amp; support</a></h2>
+<p> Bug reports and feature request can be sent to <a href="mailto:geertjan.bex@uhasselt.be">Geert Jan Bex</a>. </p>
+
+</body>
+
+</html>
+
