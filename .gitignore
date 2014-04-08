@@ -52,6 +52,10 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Autotools stuff
 Makefile
 autom4te.cache
 config.status
+
+# temporary directories
+tmp
