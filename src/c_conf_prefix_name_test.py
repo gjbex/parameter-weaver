@@ -25,7 +25,7 @@ import shutil
 import subprocess
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
+from vsc.parameter_weaver.params import Parameter, ParameterCsvParser, WeaverError
 from vsc.parameter_weaver.templatefile import TemplateFile
 from vsc.parameter_weaver.c.validator import Validator
 from vsc.parameter_weaver.base_validator import ParameterDefinitionError
@@ -41,7 +41,7 @@ class CConfRunTest(unittest.TestCase):
             os.mkdir('tmp')
         shutil.copy('tests/main_conf_dump.c', 'tmp/main_conf_dump.c')
         file_name = 'tests/prefix_c.txt'
-        parser = ParameterParser(Validator())
+        parser = ParameterCsvParser(Validator())
         parameters = parser.parse(file_name)
         formatter = Formatter(parameters)
         base_name = 'parser'

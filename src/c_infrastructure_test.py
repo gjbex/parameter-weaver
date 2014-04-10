@@ -21,8 +21,6 @@
 
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
-from vsc.parameter_weaver.base_validator import BaseValidator, ParameterDefinitionError
 from vsc.parameter_weaver.c.validator import Validator
 
 class LanguageFreaturesTest(unittest.TestCase):

@@ -21,7 +21,7 @@
 
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
+from vsc.parameter_weaver.params import Parameter, ParameterCsvParser, WeaverError
 from vsc.parameter_weaver.base_validator import BaseValidator, ParameterDefinitionError
 from vsc.parameter_weaver.c.validator import Validator
 from vsc.parameter_weaver.c.types import Int, Double, CharPtr
@@ -42,7 +42,7 @@ class ParserTest(unittest.TestCase):
             Parameter(Double(), 'f', '0.19', 'relative error'),
             Parameter(CharPtr(), 'str', 'a;bcde', 'string to print')
         ]
-        self._parser = ParameterParser(Validator())
+        self._parser = ParameterCsvParser(Validator())
 
     def test_simple_tab_separated_valid(self):
         '''Parse a simple file that is well-formed and valid'''
@@ -110,7 +110,7 @@ class ParserTest(unittest.TestCase):
            well-formed and valid, but where dialect can not be determined;
            provide delimiter'''
         file_name = 'tests/ugly_c.txt'
-        parser = ParameterParser(Validator(), delimiter=';')
+        parser = ParameterCsvParser(Validator(), delimiter=';')
         try:
             self.assertEqual(self._parameters, parser.parse(file_name))
         except ParameterDefinitionError as error:

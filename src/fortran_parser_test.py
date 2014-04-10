@@ -21,7 +21,7 @@
 
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
+from vsc.parameter_weaver.params import Parameter, ParameterCsvParser, WeaverError
 from vsc.parameter_weaver.base_validator import BaseValidator, ParameterDefinitionError
 from vsc.parameter_weaver.fortran.types import Integer, DoublePrecision, CharacterArray
 from vsc.parameter_weaver.fortran.validator import Validator
@@ -41,7 +41,7 @@ class FortranParserTest(unittest.TestCase):
             Parameter(DoublePrecision(), 'f', '0.19D00', 'relative error'),
             Parameter(CharacterArray(), 'str', 'a;bcde', 'string to print')
         ]
-        self._parser = ParameterParser(Validator())
+        self._parser = ParameterCsvParser(Validator())
 
     def test_simple_tab_separated_valid(self):
         '''Parse a simple file that is well-formed and valid'''

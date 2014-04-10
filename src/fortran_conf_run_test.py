@@ -24,7 +24,7 @@ import shutil
 import subprocess
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
+from vsc.parameter_weaver.params import Parameter, ParameterCsvParser, WeaverError
 from vsc.parameter_weaver.fortran.validator import Validator
 from vsc.parameter_weaver.base_validator import ParameterDefinitionError
 from vsc.parameter_weaver.fortran.formatter import Formatter
@@ -35,7 +35,7 @@ class FortranConfRunTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        parser = ParameterParser(Validator())
+        parser = ParameterCsvParser(Validator())
         parameters = parser.parse('tests/good_fortran.txt')
         formatter = Formatter(parameters)
         main_file = 'main_conf_dump.f90'

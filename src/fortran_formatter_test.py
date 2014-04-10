@@ -24,7 +24,7 @@ import shutil
 import subprocess
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
+from vsc.parameter_weaver.params import Parameter, ParameterCsvParser, WeaverError
 from vsc.parameter_weaver.fortran.validator import Validator
 from vsc.parameter_weaver.base_validator import ParameterDefinitionError
 from vsc.parameter_weaver.fortran.formatter import Formatter
@@ -34,7 +34,7 @@ class FortranFormatterTest(unittest.TestCase):
 
     def  setUp(self):
         file_name = 'tests/good_fortran.txt'
-        parser = ParameterParser(Validator())
+        parser = ParameterCsvParser(Validator())
         parameters = parser.parse(file_name)
         self._formatter = Formatter(parameters)
         if not os.path.isdir('tmp'):
@@ -101,7 +101,7 @@ class FortranFormatterTest(unittest.TestCase):
 
     def test_flag_dump_to_file(self):
         file_name = 'tests/flag_fortran.txt'
-        parser = ParameterParser(Validator())
+        parser = ParameterCsvParser(Validator())
         parameters = parser.parse(file_name)
         formatter = Formatter(parameters)
         base_name = 'flag_parser'

@@ -130,7 +130,7 @@ import re
 
 from base_validator import ParameterDefinitionError
 
-class ParameterParser(object):
+class ParameterCsvParser(object):
     '''class to parse a parameter definition file'''
 
     def __init__(self, validator, delimiter=None):

@@ -24,7 +24,7 @@ import shutil
 import subprocess
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
+from vsc.parameter_weaver.params import Parameter, ParameterCsvParser, WeaverError
 from vsc.parameter_weaver.templatefile import TemplateFile
 from vsc.parameter_weaver.c.validator import Validator
 from vsc.parameter_weaver.base_validator import ParameterDefinitionError
@@ -37,7 +37,7 @@ class CFormatterTest(unittest.TestCase):
     def  setUp(self):
         TemplateFile.template_dir = 'tmpl'
         file_name = 'tests/good_c.txt'
-        parser = ParameterParser(Validator())
+        parser = ParameterCsvParser(Validator())
         parameters = parser.parse(file_name)
         self._formatter = Formatter(parameters)
         if not os.path.isdir('tmp'):

@@ -24,7 +24,7 @@ import shutil
 import subprocess
 import unittest
 
-from vsc.parameter_weaver.params import Parameter, ParameterParser, WeaverError
+from vsc.parameter_weaver.params import Parameter, ParameterCsvParser, WeaverError
 from vsc.parameter_weaver.r.validator import Validator
 from vsc.parameter_weaver.base_validator import ParameterDefinitionError
 from vsc.parameter_weaver.r.formatter import Formatter
@@ -37,7 +37,7 @@ class RRunTest(unittest.TestCase):
     @classmethod
     def  setUpClass(self):
         file_name = 'tests/good_r.txt'
-        parser = ParameterParser(Validator())
+        parser = ParameterCsvParser(Validator())
         parameters = parser.parse(file_name)
         formatter = Formatter(parameters)
         if not os.path.isdir('tmp'):

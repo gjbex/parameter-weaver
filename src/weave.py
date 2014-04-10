@@ -98,7 +98,7 @@ def main():
         for lang_type in validator.types():
             print lang_type
         sys.exit(EXIT_SUCCESS)
-    parser = params_module.ParameterParser(validator)
+    parser = params_module.ParameterCsvParser(validator)
     try:
         parameters = parser.parse_file(options.file)
     except base_validator.ParameterDefinitionError as error:
