@@ -50,6 +50,9 @@ def main():
     group.add_argument('-d', '--definition', type=FileType('r'),
                        dest='file',
                        help='file containing parameter definitions')
+    arg_parser.add_argument('--delimiter', dest='delimiter',
+                            default=None, 
+                            help='explicit delimiter for CSV definition file, skip autodection')
     arg_parser.add_argument('--application', dest='application',
                             default=None, help='application name')
     arg_parser.add_argument('--description', dest='description',
@@ -98,7 +101,7 @@ def main():
         for lang_type in validator.types():
             print lang_type
         sys.exit(EXIT_SUCCESS)
-    parser = params_module.ParameterCsvParser(validator)
+    parser = params_module.ParameterCsvParser(validator, options.delimiter)
     try:
         parameters = parser.parse_file(options.file)
     except base_validator.ParameterDefinitionError as error:
