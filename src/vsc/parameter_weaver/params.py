@@ -138,6 +138,10 @@ class ParameterConfigParser(object):
         self._cfg = SafeConfigParser()
         self._info = None
 
+    @property
+    def get_info(self):
+        return self._info
+
     def parse(self, cfg_file_name):
         self._cfg.read(cfg_file_name)
         if not self._cfg.has_section('parameters'):
@@ -162,6 +166,8 @@ class ParameterConfigParser(object):
             parameter = Parameter(var_type, param_name, default,
                                   param_props['description'])
             parameters.append(parameter)
+        for item in self._cfg.items('info'):
+            self._info[item[0]] = item[1]
         return parameters
 
 
