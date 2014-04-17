@@ -125,13 +125,51 @@ class VarType(object):
         return type(self) == type(other) and self.name == other.name
 
 
+from base_validator import ParameterDefinitionError
+
+from ConfigParser import SafeConfigParser
+
+class ParameterConfigParser(object):
+    '''class to parse a parameter definition file in config format'''
+
+    def __init__(self, validator):
+        '''constructor, takes a Validator as argument'''
+        self._validator = validator;
+        self._cfg = SafeConfigParser()
+        self._info = None
+
+    def parse(self, cfg_file_name):
+        self._cfg.read(cfg_file_name)
+        if not self._cfg.has_section('parameters'):
+            pass
+        params_info = {}
+        for item in self._cfg.items('parameters'):
+            param_name, param_prop = item[0].split('.')
+            if not param_name in params_info:
+                params_info[param_name] = {'description': None}
+            params_info[param_name][param_prop] = items[1]
+        parameters = []
+        for param_name, param_props in params_info.items():
+            try:
+                self._validator.validate(param_props['type'], params_name,
+                                         params_props['default'])
+            except ParameterDefinitionError as error:
+                error.line_no = line_no
+                error.file_name = cfg_file_name
+                raise error
+            var_type = self._validator.get_type(param_props['type'])
+            default = var_type.transform(param_props['default'])
+            parameter = Parameter(var_type, param_name, default,
+                                  param_props['description'])
+            parameters.append(parameter)
+        return parameters
+
+
 import csv
 import re
 
-from base_validator import ParameterDefinitionError
-
 class ParameterCsvParser(object):
-    '''class to parse a parameter definition file'''
+    '''class to parse a parameter definition file in CSV format'''
 
     def __init__(self, validator, delimiter=None):
         '''constructor, takes a Validator as argument'''
