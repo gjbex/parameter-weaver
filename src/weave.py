@@ -46,6 +46,11 @@ def main():
     epilog_str = copyleft
     arg_parser = ArgumentParser(description=descr_str,
                                 epilog=epilog_str, prog='weave')
+    format_group = arg_parser.add_mutually_exclusive_group()
+    format_group.add_argument('--csv', action='store_true',
+                              help='definition file is in CSV format')
+    format_group.add_argument('--conf', action='store_true',
+                              help='definition file is in config format')
     group = arg_parser.add_mutually_exclusive_group()
     group.add_argument('-d', '--definition', type=FileType('r'),
                        dest='file',
@@ -101,7 +106,11 @@ def main():
         for lang_type in validator.types():
             print lang_type
         sys.exit(EXIT_SUCCESS)
-    parser = params_module.ParameterCsvParser(validator, options.delimiter)
+    if options.conf:
+        parser = params_module.ParameterConfigParser(validator)
+    else:
+        parser = params_module.ParameterCsvParser(validator,
+                                                  options.delimiter)
     try:
         parameters = parser.parse_file(options.file)
     except base_validator.ParameterDefinitionError as error:
