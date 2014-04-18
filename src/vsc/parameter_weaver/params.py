@@ -145,7 +145,7 @@ class ParameterConfigParser(object):
     def parse(self, cfg_file_name):
         self._cfg.read(cfg_file_name)
         if not self._cfg.has_section('parameters'):
-            pass
+            raise WeaverError('defintion file has no parameters section')
         params_info = {}
         for item in self._cfg.items('parameters'):
             param_name, param_prop = item[0].split('.')
