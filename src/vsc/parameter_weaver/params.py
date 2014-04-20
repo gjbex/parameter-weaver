@@ -142,8 +142,8 @@ class ParameterConfigParser(object):
     def get_info(self):
         return self._info
 
-    def parse(self, cfg_file_name):
-        self._cfg.read(cfg_file_name)
+    def parse_file(self, cfg_file):
+        self._cfg.readfp(cfg_file)
         if not self._cfg.has_section('parameters'):
             raise WeaverError('defintion file has no parameters section')
         params_info = {}
@@ -151,24 +151,32 @@ class ParameterConfigParser(object):
             param_name, param_prop = item[0].split('.')
             if not param_name in params_info:
                 params_info[param_name] = {'description': None}
-            params_info[param_name][param_prop] = items[1]
+            params_info[param_name][param_prop] = item[1]
         parameters = []
         for param_name, param_props in params_info.items():
             try:
-                self._validator.validate(param_props['type'], params_name,
-                                         params_props['default'])
+                self._validator.validate(param_props['type'], param_name,
+                                         param_props['default'])
             except ParameterDefinitionError as error:
                 error.line_no = line_no
-                error.file_name = cfg_file_name
+                error.file_name = cfg_file.name
                 raise error
             var_type = self._validator.get_type(param_props['type'])
             default = var_type.transform(param_props['default'])
             parameter = Parameter(var_type, param_name, default,
                                   param_props['description'])
             parameters.append(parameter)
-        for item in self._cfg.items('info'):
-            self._info[item[0]] = item[1]
+        if self._cfg.has_section('info'):
+            self._info = {}
+            for item in self._cfg.items('info'):
+                self._info[item[0]] = item[1]
         return parameters
+
+    def parse(self, cfg_file_name):
+        '''parses the given parameter file, returns a list of Parameter
+           objects'''
+        with open(cfg_file_name, 'rb') as cfg_file:
+            return self.parse_file(cfg_file)
 
 
 import csv
