@@ -5,6 +5,7 @@ pages:
 - ['index.md', 'Introduction and motivation']
 - ['overview.md', 'High-level overview']
 - ['c.md', 'C/C++ documentationn']
+- ['f90.md', 'Fortran 90 documentationn']
 - ['future.md', 'Future work']
 - ['contact.md', 'Contact information']
 site_dir: html_docs
