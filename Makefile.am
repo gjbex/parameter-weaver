@@ -1,1 +1,1 @@
-SUBDIRS = src doc examples
+SUBDIRS = src html_docs examples

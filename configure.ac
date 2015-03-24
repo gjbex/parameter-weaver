@@ -10,8 +10,19 @@ AC_CONFIG_FILES([
     src/vsc/parameter_weaver/r/Makefile
     src/tmpl/Makefile
     src/tmpl/c/Makefile
-    doc/Makefile
-    doc/parameter_weaver/Makefile
+    html_docs/Makefile
+    html_docs/parameter_weaver/Makefile
+    html_docs/parameter_weaver/overview/Makefile
+    html_docs/parameter_weaver/c/Makefile
+    html_docs/parameter_weaver/f90/Makefile
+    html_docs/parameter_weaver/r/Makefile
+    html_docs/parameter_weaver/future/Makefile
+    html_docs/parameter_weaver/contact/Makefile
+    html_docs/parameter_weaver/css/Makefile
+    html_docs/parameter_weaver/fonts/Makefile
+    html_docs/parameter_weaver/img/Makefile
+    html_docs/parameter_weaver/js/Makefile
+    html_docs/parameter_weaver/licence/Makefile
     examples/Makefile
     examples/parameter_weaver/Makefile
     examples/parameter_weaver/c/Makefile

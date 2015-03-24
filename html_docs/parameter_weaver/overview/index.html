@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>High-level overview - parameter-weaver documentation</title>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script>
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> parameter-weaver documentation</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      <ul class="current">
+    
+        
+            <li class="toctree-l1 current">
+                <a class="current" href=".">High-level overview</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../c">C/C++ documentationn</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../f90">Fortran 90 documentationn</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../r">R documentationn</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../future">Future work</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../contact">Contact information</a>
+            </li>
+        
+
+    
+</ul>
+
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href=".."></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    <li>High-level overview</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <h1 id="high-level-overview-concepts">High-level overview &amp; concepts</h1>
+<h2 id="parameter-definition-files">Parameter definition files</h2>
+<p>A parameter definition file is a CSV text file where each line defines a
+parameter.  A parameter has a type, a name, a default values, and
+optionally, a description.  To add documentation, comments can be added to
+the definition file.  The types are specific to the target language, e.g.,
+an integer would be denoted by <code>int</code> for C/C++, and by <code>integer</code> for
+Fortran 90.  The supported types are documented for each implemented
+target language.</p>
+<p>By way of illustration, a parameter definition file is given below for C
+as a target language, additional examples are shown in the target language
+specific sections:</p>
+<pre><code>int,numParticles,1000,number of particles in the system
+double,temperature,273,system temperature in Kelvin
+char*,intMethod,'newton',integration method to use
+</code></pre>
+
+<p>Note that this parameter definition file should be viewed as an integral
+part of the source code.</p>
+<h2 id="code-generation">Code generation</h2>
+<p>ParameterWeaver will generate code to</p>
+<ul>
+<li>initialize the parameter varaibles to the default values as specified in
+    the parameter definition file;</li>
+<li>parse the actual command line arguments at runtime to determine the user
+    specified values, and</li>
+<li>optionally, parse a configuration file;</li>
+<li>print the values of the parameters to an output stream.</li>
+</ul>
+<p>The implementation and features of the resulting code fragments are
+specific to the target language, and try to be as close as possible to the
+idioms of that language.  Again, this is documented for each target
+language specifically.  The nature and number of these code fragments
+varies from one target language to the other, again trying to match the
+language's idioms as closely as possible.  For C/C++, a declaration file
+(<code>.h</code>) and a definition file (<code>.c</code>),  as well as a source and header file
+containing definitions and declarations of auxillary functions.  For
+Fortran 90, a single file (<code>.f90</code>) will be generated that contains
+both declarations and definitions.</p>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../c" class="btn btn-neutral float-right" title="C/C++ documentationn"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Introduction and motivation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      <span style="margin-left: 15px"><a href="../c" style="color: #fcfcfc">Next &raquo;</a></span>
+    </span>
+</div>
+</body>
+</html>
