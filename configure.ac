@@ -23,6 +23,7 @@ AC_CONFIG_FILES([
     html_docs/parameter_weaver/img/Makefile
     html_docs/parameter_weaver/js/Makefile
     html_docs/parameter_weaver/license/Makefile
+    html_docs/parameter_weaver/license/highlight.js/Makefile
     examples/Makefile
     examples/parameter_weaver/Makefile
     examples/parameter_weaver/c/Makefile
