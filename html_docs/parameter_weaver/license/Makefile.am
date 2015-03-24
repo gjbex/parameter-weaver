@@ -1,1 +1,1 @@
-dist_doc_DATA = highlight.js
+SUBDIRS = highlight.js
