@@ -9,5 +9,5 @@ pages:
 - ['r.md', 'R documentationn']
 - ['future.md', 'Future work']
 - ['contact.md', 'Contact information']
-site_dir: html_docs
+site_dir: html_docs/parameter_weaver
 theme: readthedocs
