@@ -1,12 +1,10 @@
 parameter-weaver
 ================
-
 Code generator for dealing with command line arguments and configuration files
 
 What is it?
 -----------
-
-ParameterWeaver is a code generator to handle command line parameters
+parameter-weaver is a code generator to handle command line parameters
 and configuration files for C/C++/Fortran/R/Octave
 
 Copyright (C) 2013 Geert Jan Bex <geertjan.bex@uhasselt.be>
@@ -25,21 +23,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
 Prerequistes
 ------------
-
-To install ParameterWeaver, you will need GNU make, which comes with
-almost any Linux or Unix distribution.  To run ParameterWeaver, you will
+To install parameter-weaver, you will need GNU make, which comes with
+almost any Linux or Unix distribution.  To run parameter-weaver, you will
 need the Bash shell (although an equivalent shell script for a Csh-ish
-shell is easy to write), as well as a Python 2 distribution, Python 2.6.x
+shell is easy to write), as well as a Python 2 distribution, Python 2.7.x
 or later.
-
 
 
 Installation
 ------------
-
 The make file in the src directory will perform the installation.
 By default, it will install in /usr/local, but you can override this,
 see below.  So:
@@ -47,7 +41,6 @@ see below.  So:
 $ ./configure
 $ make install
 ```
-
 This will add a wrapper script weave to /usr/local/bin, and a directory
 parameter-weaver to /usr/local/lib.  It will also add a directory with
 the same name to /usr/local/doc and /usr/local/examples, creating those
@@ -62,19 +55,19 @@ $ make install
 
 Documentation
 -------------
-
 Help can be obtained using the help flag:
 ```
 $ weave -h
 ```
 Documentation in HTML format is installed in doc/parameter-weaver in the
 installation directory.  Examples can be found in examples/parameter-weaver.
-The latter also show how to use ParameterWeaver in conjunction with make.
+The latter also show how to use parameter-weaver in conjunction with make.
 
+Documentation can be found online as well:
+http://parameter-weaver.readthedocs.org/en/latest/
 
 
 Bugs, issues, feature requests
 ------------------------------
-
-Please contact the author, Geert Jan BEX <geertjan.bex@uhasselt.be>.
-
+Please contact the author, Geert Jan BEX <geertjan.bex@uhasselt.be>, or
+submit an issue on GitHub.

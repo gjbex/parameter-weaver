@@ -1,3 +1,0 @@
-Please see the readme file, README.txt for instructions
-on how to install ParameterWeaver.
-
