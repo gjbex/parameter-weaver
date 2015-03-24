@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>R documentationn - parameter-weaver documentation</title>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script>
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> parameter-weaver documentation</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      <ul class="current">
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../overview">High-level overview</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../c">C/C++ documentationn</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../f90">Fortran 90 documentationn</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 current">
+                <a class="current" href=".">R documentationn</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../future">Future work</a>
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../contact">Contact information</a>
+            </li>
+        
+
+    
+</ul>
+
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href=".."></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    <li>R documentationn</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <h1 id="r-documentation">R documentation</h1>
+<h2 id="data-types">Data types</h2>
+<p>For R, ParameterWeaver supports the following data types:</p>
+<ul>
+<li><code>integer</code></li>
+<li><code>double</code></li>
+<li><code>logical</code></li>
+<li><code>string</code></li>
+</ul>
+<h2 id="example-r-script">Example R script</h2>
+<p>Suppose we want to pass command line parameters to the following R script:</p>
+<pre><code>if (nchar(out) &amp;gt; 0) {
+    conn &lt;- file(out, 'w')
+} else {
+    conn = stdout()
+}
+if (verbose) {
+    write(sprintf(&quot;# n = %d\n&quot;, n), conn)
+    write(sprintf(&quot;# alpha = %.16f\n&quot;, alpha), conn)
+    write(sprintf(&quot;# out = '%s'\n&quot;, out), conn)
+    write(sprintf(&quot;# verbose = %s\n&quot;, verbose), conn)
+}
+for (i in 1:n) {
+    write(sprintf(&quot;%d\t%f\n&quot;, i, i*alpha), conn)
+}
+if (conn != stdout()) {
+    close(conn)
+}
+</code></pre>
+
+<p>We would like to set the number of iterations <code>n</code>, the factor <code>alpha</code>, the
+name of the file to write the output to <code>out</code> and the verbosity <code>verbose</code>
+at runtime, i.e., without modifying the source code of this script.</p>
+<p>Moreover, the code to print the values of the variables is error prone, if
+we later add or remove a parameter, this part of the code has to be updated
+as well.</p>
+<p>Defining the command line parameters in a parameter definition file to
+automatlically generate the necessary code simplifies matters considerably.</p>
+<h2 id="example-parameter-definition-file">Example parameter definition file</h2>
+<p>The following file defines four command line parameters named <code>n</code>, <code>alpha</code>,
+<code>out</code> and <code>verbose</code>.  They are to be interpreted as <code>integer</code>, <code>double</code>,
+string and <code>logical</code> respectively, and if no values are passed via the
+command line, they will have the default values <code>10</code>, <code>0.19</code>, <code>output.txt</code>
+and false respectively.  Note that a string default value is quoted, just
+as it would be in R code.  In this case, the columns in the file are
+separated by tab characters.  The following is the contents of the
+parameter definition file <code>param_defs.txt</code>:</p>
+<pre><code>integer n   10
+double  alpha   0.19
+string  out 'output.txt'
+logical verbose F
+</code></pre>
+
+<p>This parameter definition file can be created in a text editor such as the
+one used to write R scripts, or from a Microsoft Excel worksheet by saving
+the latter as a CSV file.</p>
+<p>As mentioned above, logical values are also supported, however, the
+semantics is slightly different from other data types.  The default value
+of a logical variable is always false, regardless of what is specified in
+the parameter definition file.  As opposed to parameters of other types, a
+logical parameter acts like a flag, i.e., it is a command line options that
+doesn't take a value.  Its absence is interpreted as false, its presence as
+true.</p>
+<h2 id="generating-code">Generating code</h2>
+<p>Generating the code fragments is now very easy.  If appropriate, load the
+module (thinking):</p>
+<pre><code>$ module load parameter-weaver
+</code></pre>
+
+<p>Next, we generate the code based on the parameter definition file:</p>
+<pre><code>$ weave -l R -d param_defs.txt
+</code></pre>
+
+<p>Three code fragments are generated, all grouped in a single R file
+<code>cl_params.r</code>.</p>
+<ul>
+<li>Initialization: the default values of the command line parameters are
+    assigned to global variables with the names as specified in the
+    parameter definition file.</li>
+<li>Parsing: the options passed to the program via the command line are
+    assigned to the appropriate variables.  Moreover, an array containing
+    the remaining command line arguments is creaed as <code>cl_params</code>.</li>
+<li>Dumper: a function is defined that takes two arguments: a file
+    connector and a prefix.  This function writes the values of the command
+    line parameters to the file connector, each on a separate line,
+    preceeded by the specified prefix.</li>
+</ul>
+<h2 id="using-the-code-fragments">Using the code fragments</h2>
+<p>The code fragments can be included into the R script by sourcing it:</p>
+<pre><code>  source(&quot;cl_parser.r&quot;)
+</code></pre>
+
+<p>The parameter initialization and parsing are executed at this point, the dumper can be called whenever the user likes, e.g.,</p>
+<pre><code>  dump_cl(stdout(), &quot;&quot;)
+</code></pre>
+
+<p>The code for the script is thus modified as follows:</p>
+<pre><code>source('cl_params.r')
+if (nchar(out) &amp;gt; 0) {
+    conn &lt;- file(out, 'w')
+} else {
+    conn = stdout()
+}
+if (verbose) {
+    dump_cl(conn, &quot;# &quot;)
+}
+for (i in 1:n) {
+    cat(paste(i, &quot;\t&quot;, i*alpha), file = conn, sep = &quot;\n&quot;)
+}
+if (conn != stdout()) {
+    close(conn)
+}
+</code></pre>
+
+<p>Note that in this example, additional command line parameters are simply
+ignored.  As mentioned before, they are available in the vector <code>cl_params</code>
+if needed.</p>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../future" class="btn btn-neutral float-right" title="Future work"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../f90" class="btn btn-neutral" title="Fortran 90 documentationn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      <span><a href="../f90" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      <span style="margin-left: 15px"><a href="../future" style="color: #fcfcfc">Next &raquo;</a></span>
+    </span>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+site_name: parameter-weaver documentation
+site_description: parameter-weaver offers easy command line argument and configuration file handling for C/C++/Fortran/R
+site_author: Geert Jan Bex
+pages:
+- ['index.md', 'Introduction and motivation']
+- ['overview.md', 'High-level overview']
+- ['c.md', 'C/C++ documentationn']
+- ['f90.md', 'Fortran 90 documentationn']
+- ['r.md', 'R documentationn']
+- ['future.md', 'Future work']
+- ['contact.md', 'Contact information']
+site_dir: html_docs/parameter_weaver
+theme: readthedocs
