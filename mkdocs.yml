@@ -7,6 +7,7 @@ pages:
 - ['c.md', 'C/C++ documentationn']
 - ['f90.md', 'Fortran 90 documentationn']
 - ['r.md', 'R documentationn']
+- ['make.md', 'Using make files']
 - ['future.md', 'Future work']
 - ['contact.md', 'Contact information']
 site_dir: html_docs/parameter_weaver

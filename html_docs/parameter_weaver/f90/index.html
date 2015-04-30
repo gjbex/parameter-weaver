@@ -8,6 +8,8 @@
   <title>Fortran 90 documentationn - parameter-weaver documentation</title>
   
 
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
@@ -15,16 +17,12 @@
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
   <script type="text/javascript" src="../js/highlight.pack.js"></script>
-  <script src="../js/theme.js"></script>
+  <script src="../js/theme.js"></script> 
 
-  <style>
-    body {font-size: 90%;}
-    pre, code {font-size: 100%;}
-    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
-  </style> 
+  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -43,42 +41,83 @@
     
         
             <li class="toctree-l1 ">
-                <a class="" href="../overview">High-level overview</a>
+                <a class="" href="..">Introduction and motivation</a>
+                
             </li>
         
 
     
         
             <li class="toctree-l1 ">
-                <a class="" href="../c">C/C++ documentationn</a>
+                <a class="" href="../overview/">High-level overview</a>
+                
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../c/">C/C++ documentationn</a>
+                
             </li>
         
 
     
         
             <li class="toctree-l1 current">
-                <a class="current" href=".">Fortran 90 documentationn</a>
+                <a class="current" href="./">Fortran 90 documentationn</a>
+                
+                    <ul>
+                    
+                        <li class="toctree-l3"><a href="#fortran-90-documentation">Fortran 90 documentation</a></li>
+                        
+                            <li><a class="toctree-l4" href="#data-types">Data types</a></li>
+                        
+                            <li><a class="toctree-l4" href="#example-fortran-90-program">Example Fortran 90 program</a></li>
+                        
+                            <li><a class="toctree-l4" href="#example-parameter-definition-file">Example parameter definition file</a></li>
+                        
+                            <li><a class="toctree-l4" href="#generating-code">Generating code</a></li>
+                        
+                            <li><a class="toctree-l4" href="#using-the-code-fragments">Using the code fragments</a></li>
+                        
+                            <li><a class="toctree-l4" href="#using-a-configuration-file">Using a configuration file</a></li>
+                        
+                    
+                    </ul>
+                
             </li>
         
 
     
         
             <li class="toctree-l1 ">
-                <a class="" href="../r">R documentationn</a>
+                <a class="" href="../r/">R documentationn</a>
+                
             </li>
         
 
     
         
             <li class="toctree-l1 ">
-                <a class="" href="../future">Future work</a>
+                <a class="" href="../make/">Using make files</a>
+                
             </li>
         
 
     
         
             <li class="toctree-l1 ">
-                <a class="" href="../contact">Contact information</a>
+                <a class="" href="../future/">Future work</a>
+                
+            </li>
+        
+
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../contact/">Contact information</a>
+                
             </li>
         
 
@@ -93,8 +132,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
-        <a href=".."></a>
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">parameter-weaver documentation</a>
       </nav>
 
       
@@ -103,6 +142,7 @@
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="..">Docs</a> &raquo;</li>
+    
     <li>Fortran 90 documentationn</li>
       <li class="wy-breadcrumbs-aside">
         
@@ -291,17 +331,16 @@ call:</p>
 <p>Note that both command line parameters and configuration files can be used
 in the same program, and that their priority is simply determined by the
 order of calling <code>parse_cl</code> and <code>file_parse_cl</code>.</p>
-
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../r" class="btn btn-neutral float-right" title="R documentationn"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../r/" class="btn btn-neutral float-right" title="R documentationn"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../c" class="btn btn-neutral" title="C/C++ documentationn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../c/" class="btn btn-neutral" title="C/C++ documentationn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -327,9 +366,14 @@ order of calling <code>parse_cl</code> and <code>file_parse_cl</code>.</p>
 <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
         
-      <span><a href="../c" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      <span style="margin-left: 15px"><a href="../r" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../c/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      <span style="margin-left: 15px"><a href="../r/" style="color: #fcfcfc">Next &raquo;</a></span>
     </span>
 </div>
+
+<!--
+MkDocs version  : 0.12.2
+Docs Build Date : 2015-04-30 19:19:32.925679
+-->
 </body>
 </html>
