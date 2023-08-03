@@ -58,10 +58,7 @@ class Parameter(object):
     @property
     def description(self):
         '''description of the parameter, read-only'''
-        if self._descr is None:
-            return ''
-        else:
-            return self._descr
+        return '' if self._descr is None else self._descr
 
     def __repr__(self):
         '''representation of the parameter, as is read from definition
@@ -82,10 +79,7 @@ class VarType(object):
     def __init__(self, name, enduser_name=None):
         '''Constructor, takes type name as parameter'''
         self._name = name
-        if enduser_name:
-            self._enduser_name = enduser_name
-        else:
-            self._enduser_name = name
+        self._enduser_name = enduser_name if enduser_name else name
 
     @property
     def name(self):
@@ -96,21 +90,12 @@ class VarType(object):
         return self._enduser_name
 
     def is_of_type(self, value):
-        if True:
-            raise ParameterDefinitionError(
-                    "method not implemented for type '{0}'".format(self.name))
-        else:
-            raise ParameterDefinitionError(
-                    "value '{0}' is invalid for type '{1}'".format(value,
-                                                                   self.name))
+        raise ParameterDefinitionError(
+                "method not implemented for type '{0}'".format(self.name))
 
     def is_valid_var_name(self, var_name):
-        if True:
-            raise ParameterDefinitionError(
-                    "method not implemented for type '{0}'".format(self.name))
-        else:
-            raise ParameterDefinitionError(
-                    "not a valid name for type '{0}'".format(self.name))
+        raise ParameterDefinitionError(
+                "method not implemented for type '{0}'".format(self.name))
     
     def is_valid_type_name(self, type_name):
         return self.is_valid_var_name(type_name)

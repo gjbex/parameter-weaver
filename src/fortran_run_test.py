@@ -34,7 +34,7 @@ from utils import parse_dump
 class FortranRunTest(unittest.TestCase):
 
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         parser = ParameterParser(Validator())
         parameters = parser.parse('tests/good_fortran.txt')
         formatter = Formatter(parameters)
@@ -48,8 +48,8 @@ class FortranRunTest(unittest.TestCase):
         flag_base_name = 'flag_parser'
         main_file = 'main_dump.f90'
         flag_main_file = 'flag_main_dump.f90'
-        self._exec_file = './cl_test_F'
-        self._flag_exec_file = './cl_flag_test_F'
+        cls._exec_file = './cl_test_F'
+        cls._flag_exec_file = './cl_flag_test_F'
         artifacts = formatter.get_artifacts(base_name)
         module_file = artifacts[0].name
         artifacts[0].action(os.path.join('tmp', module_file))
@@ -57,19 +57,26 @@ class FortranRunTest(unittest.TestCase):
         flag_module_file = flag_artifacts[0].name
         flag_artifacts[0].action(os.path.join('tmp', flag_module_file))
         os.chdir('tmp')
-        exit_code = subprocess.call(['gfortran', '-o', self._exec_file,
-                                      module_file, main_file,
-                                      '-lm'])
+        exit_code = subprocess.call(
+            ['gfortran', '-o', cls._exec_file, module_file, main_file, '-lm']
+        )
         if exit_code != 0:
-            self.fail('link failed')
-        exit_code = subprocess.call(['gfortran', '-o', self._flag_exec_file,
-                                     flag_module_file, flag_main_file,
-                                     '-lm'])
+            cls.fail('link failed')
+        exit_code = subprocess.call(
+            [
+                'gfortran',
+                '-o',
+                cls._flag_exec_file,
+                flag_module_file,
+                flag_main_file,
+                '-lm',
+            ]
+        )
         if exit_code != 0:
-            self.fail('flag link failed')
+            cls.fail('flag link failed')
 
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         os.chdir('..')
 
     def test_default_run(self):

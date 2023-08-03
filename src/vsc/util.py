@@ -54,14 +54,14 @@ class Indenter(object):
     def indent(self, text, count=None):
         if len(text.strip()) == 0:
             return text
-        else:
-            if count is not None:
-                indent = count*self.indent_str
-            else:
-                indent = self.level*self.indent_str
-            lines = text.split(self.eol)
-            lines = [indent + x for x in lines]
-            return self.eol.join(lines)
+        indent = (
+            count * self.indent_str
+            if count is not None
+            else self.level * self.indent_str
+        )
+        lines = text.split(self.eol)
+        lines = [indent + x for x in lines]
+        return self.eol.join(lines)
 
     def add(self, line=''):
         self._buffer.append(self.indent(line))

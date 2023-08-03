@@ -34,7 +34,7 @@ from utils import parse_dump
 class FortranConfRunTest(unittest.TestCase):
 
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         parser = ParameterParser(Validator())
         parameters = parser.parse('tests/good_fortran.txt')
         formatter = Formatter(parameters)
@@ -44,19 +44,19 @@ class FortranConfRunTest(unittest.TestCase):
         shutil.copy('tests/{0}'.format(main_file),
                     'tmp/{0}'.format(main_file))
         base_name = 'parser'
-        self._exec_file = './cl_test_F'
+        cls._exec_file = './cl_test_F'
         artifacts = formatter.get_artifacts(base_name)
         module_file = artifacts[0].name
         artifacts[0].action(os.path.join('tmp', module_file))
         os.chdir('tmp')
-        exit_code = subprocess.call(['gfortran', '-o', self._exec_file,
-                                      module_file, main_file,
-                                      '-lm'])
+        exit_code = subprocess.call(
+            ['gfortran', '-o', cls._exec_file, module_file, main_file, '-lm']
+        )
         if exit_code != 0:
-            self.fail('link failed')
+            cls.fail('link failed')
 
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         os.chdir('..')
 
     def test_default_run(self):

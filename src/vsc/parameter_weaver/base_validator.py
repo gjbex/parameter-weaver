@@ -80,11 +80,10 @@ class BaseValidator(object):
     def get_type(self, type_name):
         if self.has_type(type_name):
             return self._types[type_name]
-        else:
-            error = ParameterDefinitionError(
-                    "type '{0}' is unknown for language {1}".format(type,
-                        self.programming_language))
-            raise error
+        error = ParameterDefinitionError(
+                "type '{0}' is unknown for language {1}".format(type,
+                    self.programming_language))
+        raise error
 
     def types(self):
         return self._types.keys()
