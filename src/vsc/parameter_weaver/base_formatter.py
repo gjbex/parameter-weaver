@@ -71,7 +71,7 @@ class BaseFormatter(object):
            values to the parameter structure'''
         return None
         
-    def dumper(self_):                 
+    def dumper(self):
         '''Returns the code to dump the parameter values to a file for
            documentation or debugging'''
         return None

@@ -49,7 +49,7 @@ class CFormatterTest(unittest.TestCase):
         try:
             artifacts = self._formatter.get_artifacts(base_name)
             for artifact in artifacts:
-                if artifact.name.endswith(base_name + '.h'):
+                if artifact.name.endswith(f'{base_name}.h'):
                     file_name = artifact.path
                 artifact.action(os.path.join('tmp', artifact.name))
             os.chdir('tmp')
@@ -63,7 +63,7 @@ class CFormatterTest(unittest.TestCase):
         try:
             artifacts = self._formatter.get_artifacts(base_name)
             for artifact in artifacts:
-                if artifact.name.endswith(base_name + '.c'):
+                if artifact.name.endswith(f'{base_name}.c'):
                     file_name = artifact.path
                 artifact.action(os.path.join('tmp', artifact.name))
             os.chdir('tmp')

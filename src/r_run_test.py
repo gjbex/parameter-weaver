@@ -35,7 +35,7 @@ class RRunTest(unittest.TestCase):
     '''Tests for the parameter definition formatter'''
 
     @classmethod
-    def  setUpClass(self):
+    def setUpClass(cls):
         file_name = 'tests/good_r.txt'
         parser = ParameterParser(Validator())
         parameters = parser.parse(file_name)
@@ -44,14 +44,14 @@ class RRunTest(unittest.TestCase):
             os.mkdir('tmp')
         shutil.copy('tests/main_dump.r', 'tmp/main_dump.r')
         base_name = 'parser'
-        self._main_file = 'main_dump.r'
+        cls._main_file = 'main_dump.r'
         artifacts = formatter.get_artifacts(base_name)
         parser_file = artifacts[0].name
         artifacts[0].action(os.path.join('tmp', parser_file))
         os.chdir('tmp')
 
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         os.chdir('..')
 
     def test_default_run(self):

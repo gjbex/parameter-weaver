@@ -26,13 +26,13 @@ def determine_base_name(path):
 import re
 
 def parse_dump(text):
-   values = {}
-   for line in text.split('\n'):
-       if len(line.strip()) > 0:
-           parts = re.split(r'\s*=\s*', line, 2)
-           if parts[0] == 'remainder':
-               values[parts[0]] = [x for x in parts[1].strip().split(',')]
-           else:
-               values[parts[0]] = parts[1].strip()
-   return values
+    values = {}
+    for line in text.split('\n'):
+        if len(line.strip()) > 0:
+            parts = re.split(r'\s*=\s*', line, 2)
+            if parts[0] == 'remainder':
+                values[parts[0]] = list(parts[1].strip().split(','))
+            else:
+                values[parts[0]] = parts[1].strip()
+    return values
     

@@ -37,7 +37,7 @@ class CHelpRunTest(unittest.TestCase):
     '''Tests for the parameter definition formatter with help enabled'''
 
     @classmethod
-    def  setUpClass(self):
+    def setUpClass(cls):
         if not os.path.isdir('tmp'):
             os.mkdir('tmp')
         shutil.copy('tests/main_dump.c', 'tmp/main_dump.c')
@@ -57,15 +57,15 @@ class CHelpRunTest(unittest.TestCase):
             artifact.action(os.path.join('tmp', artifact.name))
         c_files = [x.name for x in artifacts if x.name.endswith('.c')]
         c_files.append('main_dump.c')
-        self._exec_file = './cl_dump_test'
-        args = ['gcc', '-o', self._exec_file] + c_files + ['-lm']
+        cls._exec_file = './cl_dump_test'
+        args = ['gcc', '-o', cls._exec_file] + c_files + ['-lm']
         os.chdir('tmp')
         exit_code = subprocess.call(args)
         if exit_code != 0:
-            self.fail('link failed')
+            cls.fail('link failed')
 
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         os.chdir('..')
 
     def test_default_run(self):
@@ -155,8 +155,7 @@ class CHelpRunTest(unittest.TestCase):
         result = subprocess.check_output([self._exec_file, '-my_string', 'alpha', '-?'], stderr=subprocess.STDOUT)
         target_lines = []
         with open('../tests/descr_help.txt', 'r') as help_file:
-            for line in help_file:
-                target_lines.append(line.rstrip('\n\r'))
+            target_lines.extend(line.rstrip('\n\r') for line in help_file)
         target = '\n'.join(target_lines)
         self.assertEqual(target, result)
 

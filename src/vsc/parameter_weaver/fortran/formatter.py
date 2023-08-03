@@ -170,19 +170,18 @@ class Formatter(BaseFormatter):
         indenter.add('type(params_type), intent(in) :: params')
         for param in self._parameters:
             name = param.name
-            format = param.type.format_string
             if isinstance(param.type, CharacterArray):
                 indenter.add("write (unit_nr, '(A)') &")
                 indenter.incr()
                 indenter.add("prefix // &")
                 indenter.add("'{0} = ''' // trim(params % {0}) // ''''".format(name))
-                indenter.decr()
             else:
+                format = param.type.format_string
                 indenter.add("write (unit_nr, '(A, {0})') &".format(format))
                 indenter.incr()
                 indenter.add("prefix // &")
                 indenter.add("'{0} = ', params % {0}".format(name))
-                indenter.decr()
+            indenter.decr()
         indenter.add('return')
         indenter.decr().add('end subroutine dump_cl')
         return indenter.text()

@@ -88,7 +88,7 @@ class Logical(RType):
         super(Logical, self).__init__('logical')
 
     def is_of_type(self, value):
-        if value != 'TRUE' and value != 'T' and value != 'FALSE' and value != 'F':
+        if value not in ['TRUE', 'T', 'FALSE', 'F']:
             msg = "value '{0}' is invalid for type '{1}'".format(value, self.name)
             raise ParameterDefinitionError(msg)
         
